@@ -1,0 +1,11 @@
+.footer {
+    @apply bg-zinc-800 border-t border-zinc-700 py-8;
+  }
+  
+  .footer-container {
+    @apply container mx-auto px-4 flex flex-col md:flex-row justify-between items-center;
+  }
+  
+  .footer-copyright {
+    @apply text-sm text-zinc-400 mb-4 md:mb-0;
+  }
