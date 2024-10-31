@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FormData, ValidationErrors } from '../../types/auth';
 import { validateForm } from '../../utils/validation';
 import PasswordInput from '../auth/PasswordInput';
@@ -199,9 +200,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, er
 
       <p className={classes.footer}>
         Already have an account?{" "}
-        <a href="/login" className={classes.link}>
+        <Link to="/login" className={classes.link}>
           Log in
-        </a>
+        </Link>
       </p>
     </form>
   );
