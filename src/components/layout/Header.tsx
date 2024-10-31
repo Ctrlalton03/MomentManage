@@ -90,6 +90,15 @@ const Header: React.FC = () => {
               Sign up
             </Button>
             </Link>
+            <Link to="/login">
+            <Button 
+              variant="outline" 
+              className={classes['mobile-menu-button']}
+              onClick={toggleMenu}
+            >
+              Login
+            </Button>
+            </Link>
           </div>
         </div>
       )}
