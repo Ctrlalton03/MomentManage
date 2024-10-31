@@ -50,7 +50,7 @@
 }
 
 .header-menu-button {
-  display: none;
+  display: flex;
 }
 
 .mobile-menu {
