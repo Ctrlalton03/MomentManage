@@ -1,5 +1,6 @@
-export interface FormData {
+ export interface FormData {
     name: string;
+    username: string;
     email: string;
     password: string;
     terms: boolean;
@@ -8,6 +9,7 @@ export interface FormData {
   export interface ValidationErrors {
     name?: string;
     email?: string;
+    username?: string;
     password?: string;
     terms?: string;
   }
@@ -17,3 +19,4 @@ export interface FormData {
     isLoading?: boolean;
     error?: string;
   }
+

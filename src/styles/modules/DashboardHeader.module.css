@@ -1,0 +1,80 @@
+.header {
+  background-color: rgb(39, 39, 42); /* bg-zinc-800 */
+  border-bottom: 1px solid rgb(59, 130, 246); /* border-blue-500 */
+  padding: 1rem; /* p-4 */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.container {
+  max-width: 1280px; /* container */
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space-x-4 */
+}
+
+.logo {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+}
+
+.nav {
+  display: none; /* hidden by default */
+  gap: 1rem; /* space-x-4 */
+}
+
+.avatarImageContainer{
+  max-width: 75px;
+}
+
+.avatarImageContainer img{
+  border-radius: 50px ;
+}
+
+
+
+/* Show nav on medium screens and up */
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
+
+.navLink {
+  color: rgb(212, 212, 216); /* text-zinc-300 */
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: rgb(255, 255, 255); /* text-white */
+}
+
+.navLinkActive {
+  color: rgb(255, 255, 255); /* text-white */
+  font-weight: 600; /* font-semibold */
+  border-bottom: 2px solid rgb(59, 130, 246); /* border-blue-500 */
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space-x-4 */
+}
+
+.iconButton {
+  color: rgb(212, 212, 216); /* text-zinc-300 */
+  transition: color 0.2s ease;
+}
+
+.iconButton:hover {
+  color: rgb(96, 165, 250); /* text-blue-400 */
+}

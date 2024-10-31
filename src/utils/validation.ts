@@ -23,5 +23,11 @@ export const validateForm = (data: FormData): ValidationErrors => {
     errors.terms = "You must accept the terms and conditions";
   }
 
+  if (!data.username) {
+    errors.username = 'Username is required';
+  } else if (data.username.length < 3) {
+    errors.username = 'Username must be at least 3 characters';
+  }
+
   return errors;
 };

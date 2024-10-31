@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     <>
       <header className={classes.header}>
         <div className={classes['header-container']}>
-          <Link className={classes['header-logo']} to="#">
+          <Link className={classes['header-logo']} to="/">
             <span className={classes['header-logo-text']}>
               Moment Manager
             </span>

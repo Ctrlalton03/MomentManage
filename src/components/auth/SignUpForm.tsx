@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { FormData, ValidationErrors } from '../../types/auth';
 import { validateForm } from '../../utils/validation';
 import PasswordInput from '../auth/PasswordInput';
-import LoadingButton from '@/components/ui/LoadingButton';
+import LoadingButton from '../../components/ui/LoadingButton';
 import classes from '../../styles/modules/SignUpForm.module.css';
-
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 interface SignUpFormProps {
   onSubmit: (data: FormData) => Promise<void>;
@@ -13,8 +14,10 @@ interface SignUpFormProps {
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, error }) => {
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
+    username: "",
     email: "",
     password: "",
     terms: false
@@ -24,7 +27,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, er
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev: FormData) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
@@ -37,16 +40,66 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, er
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      terms: false
+    });
+    setValidationErrors({});
+  };
+
+   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const errors = validateForm(formData);
-    
     if (Object.keys(errors).length > 0) {
-      setValidationErrors(errors);
-      return;
+        setValidationErrors(errors);
+        return;
     }
 
-    await onSubmit(formData);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+      
+      if (userCredential.user) {
+        await updateProfile(userCredential.user, {
+          displayName: formData.name
+        });
+      }
+
+      if (onSubmit) {
+        await onSubmit(formData);
+      }
+      resetForm();
+    } catch (error: any) {
+      console.error('Signup error:', error);
+      let errorMessage = 'Failed to create an account';
+      
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          errorMessage = 'Email is already registered';
+          break;
+        case 'auth/weak-password':
+          errorMessage = 'Password should be at least 6 characters';
+          break;
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address';
+          break;
+        default:
+          errorMessage = error.message || 'Failed to create an account';
+      }
+      
+      setValidationErrors(prev => ({
+        ...prev,
+        email: errorMessage
+      }));
+    }
   };
 
   return (
@@ -72,6 +125,23 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, er
           />
           {validationErrors.name && (
             <p className={classes.validationError}>{validationErrors.name}</p>
+          )}
+        </div>
+
+        <div className={classes.inputWrapper}>
+          <label htmlFor="username" className={classes.label}>
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            placeholder="johndoe123"
+            className={classes.input}
+          />
+          {validationErrors.username && (
+            <p className={classes.validationError}>{validationErrors.username}</p>
           )}
         </div>
 
@@ -123,7 +193,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, er
         )}
       </div>
 
-      <LoadingButton type="submit" isLoading={isLoading} loadingText="Signing up...">
+      <LoadingButton type="submit" className={classes.button} isLoading={isLoading} loadingText="Signing up...">
         Sign Up
       </LoadingButton>
 
