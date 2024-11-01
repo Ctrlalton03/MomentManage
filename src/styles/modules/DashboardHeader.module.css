@@ -1,14 +1,15 @@
 .header {
-  background-color: rgb(39, 39, 42); /* bg-zinc-800 */
-  border-bottom: 1px solid rgb(59, 130, 246); /* border-blue-500 */
-  padding: 1rem; /* p-4 */
+  background-color: rgb(39, 39, 42); 
+  border-bottom: 1px solid rgb(59, 130, 246); 
+  padding: 10px;
   position: sticky;
   top: 0;
   z-index: 10;
+  
 }
 
 .container {
-  max-width: 1280px; /* container */
+  max-width: 1280px; 
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -17,23 +18,26 @@
 }
 
 .logoSection {
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 1rem; /* space-x-4 */
+  gap: 1rem; 
 }
 
 .logo {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 700; /* font-bold */
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  color: rgb(59, 130, 246); 
+  font-weight: bold;
+  line-height: 1.2; 
 }
-
 .nav {
   display: none; /* hidden by default */
   gap: 1rem; /* space-x-4 */
 }
 
 .avatarImageContainer{
-  max-width: 75px;
+  max-width: 50px;
 }
 
 .avatarImageContainer img{

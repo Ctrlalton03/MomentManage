@@ -1,0 +1,84 @@
+.card {
+  padding: 10px;
+  border-radius: 1rem;
+  background-color: rgb(39 39 42); /* zinc-800 */
+  border-color: rgb(63 63 70); /* zinc-700 */
+  box-shadow: 0 4px 6px -1px rgb(59 130 246 / 0.1); /* shadow-md shadow-blue-500/10 */
+}
+
+
+
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+}
+
+.title h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.titleIcon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #3b82f6;
+  position: relative;
+  top: 1px;
+  display: inline-block;
+}
+
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space-y-4 */
+}
+
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+}
+
+.activityIcon {
+  margin-right: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.activityContent {
+  flex: 1;
+}
+
+.activityText {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: rgb(229 229 229); /* text-zinc-200 */
+}
+
+.activityTimestamp {
+  font-size: 0.75rem; /* text-xs */
+  color: rgb(161 161 170); /* text-zinc-400 */
+}
+
+.todoIcon {
+  height: 1rem;
+  width: 1rem;
+  color: #3b82f6; /* blue-500 */
+}
+
+.calendarIcon {
+  height: 1rem;
+  width: 1rem;
+  color: #22c55e; /* green-500 */
+}
+
+.journalIcon {
+  height: 1rem;
+  width: 1rem;
+  color: #a855f7; /* purple-500 */
+} 

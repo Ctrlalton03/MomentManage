@@ -6,7 +6,9 @@ import PasswordInput from '../auth/PasswordInput';
 import LoadingButton from '../../components/ui/LoadingButton';
 import classes from '../../styles/modules/SignUpForm.module.css';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../config/firebase';
+import { setDoc, doc } from 'firebase/firestore';   
+import { db, auth } from '../../config/firebase';
+
 
 interface SignUpFormProps {
   onSubmit: (data: FormData) => Promise<void>;
@@ -69,9 +71,17 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading = false, er
       );
       
       if (userCredential.user) {
-        await updateProfile(userCredential.user, {
-          displayName: formData.name
-        });
+       await setDoc(doc(db, 'users', userCredential.user.uid), {
+        username: formData.username,
+        name: formData.name,
+        email: formData.email,
+        createdAt: new Date().toISOString(),
+        uid: userCredential.user.uid
+       });
+
+       await updateProfile(userCredential.user, {
+        displayName: formData.username
+      });
       }
 
       if (onSubmit) {

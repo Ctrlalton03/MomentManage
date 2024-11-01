@@ -8,17 +8,20 @@ import { QuickActions } from "@/components/Dashboard/QuickActions"
 import { RecentActivity } from "@/components/Dashboard/RecentActivity"
 import { TodoItem, ActivityItem } from "@/types"
 import { useNavigate } from 'react-router-dom'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../config/firebase'
-import styles from './Dashboard.module.css'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth, db } from '../config/firebase'
+import styles from '@/styles/modules/dashboard.module.css'
+import { getDoc, doc } from "firebase/firestore"
+import  UpcomingEvents  from "@/components/Dashboard/UpcomingEvents"
 
 const DashboardPage: React.FC = () => {
   const [user, setUser] = useState<any>(null)
+  const [username, setUsername] = useState<string>('')
   const [loading, setLoading] = useState(true)
   const [todos, setTodos] = useState<TodoItem[]>([
     { id: 1, text: "Complete project proposal", completed: false },
     { id: 2, text: "Schedule team meeting", completed: false },
-    { id: 3, text: "Prepare presentation", completed: false },
+    { id: 3, text: "Prepare presentation", completed: true },
   ])
   const [recentActivities] = useState<ActivityItem[]>([
     { id: 1, type: 'todo', action: 'Added new task: Review quarterly report', timestamp: '2 hours ago' },
@@ -28,11 +31,22 @@ const DashboardPage: React.FC = () => {
   ])
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0)
   const navigate = useNavigate()
+  const [events] = useState([
+    { id: 1, title: "Team Meeting", date: "2024-03-20", time: "10:00 AM" },
+    { id: 2, title: "Project Deadline", date: "2024-03-22", time: "5:00 PM" },
+    { id: 3, title: "Client Presentation", date: "2024-03-25", time: "2:30 PM" },
+  ])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user)
+
+        const userDoc = await getDoc(doc(db, 'users', user.uid))
+        if (userDoc.exists()) {
+          setUsername(userDoc.data().username)
+        }
+
       } else {
         navigate('/login') // Redirect to login if no user
       }
@@ -66,7 +80,15 @@ const DashboardPage: React.FC = () => {
     return null // This shouldn't show as navigate will redirect
   }
 
-  const username = user.displayName || user.email
+  const SignOut = async () => {
+    try {
+        await signOut(auth)
+        navigate('/login')
+    } catch (error) {
+        console.error('Error signing out:', error)
+    }
+  }
+  
 
   return (
     <div className={styles.container}>
@@ -79,6 +101,7 @@ const DashboardPage: React.FC = () => {
           <TopTask task={currentTask} onToggleComplete={toggleTaskCompletion} />
         </section>
         <QuickActions />
+        <UpcomingEvents events={events} />
         <section className={styles.activitySection}>
           <RecentActivity activities={recentActivities} />
         </section>
@@ -86,6 +109,7 @@ const DashboardPage: React.FC = () => {
           <Button 
             variant="outline" 
             className={styles.logoutButton}
+            onClick={SignOut}
           >
             <LogOut className={styles.logoutIcon} /> Log Out
           </Button>

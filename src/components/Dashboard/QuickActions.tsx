@@ -6,7 +6,9 @@ import styles from "@/styles/modules/QuickActions.module.css"
 export const QuickActions: React.FC = () => {
   return (
     <section className={styles.quickActionsSection}>
-      <Link to="/todo" className={styles.actionLink}>
+    <h2 className={styles.quickActionsHeading}>Quick Actions</h2>
+    <div className={styles.actionCardsContainer}>
+    <Link to="/todo" className={styles.actionLink}>
         <div className={styles.actionCard}>
           <CheckCircle className={`${styles.actionIcon} ${styles.todoIcon}`} />
           <h3 className={styles.actionTitle}>To-Do List</h3>
@@ -24,7 +26,8 @@ export const QuickActions: React.FC = () => {
           <h3 className={styles.actionTitle}>Journal</h3>
         </div>
       </Link>
-    </section>
+    </div>
+  </section>
   )
 }
 

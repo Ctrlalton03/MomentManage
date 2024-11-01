@@ -1,0 +1,86 @@
+.card {
+  padding: 10px;
+  border-radius: 1rem;
+  background-color: rgb(39 39 42); /* zinc-800 */
+  border-color: rgb(63 63 70); /* zinc-700 */
+  box-shadow: 0 4px 6px -1px rgb(59 130 246 / 0.1);
+  margin: 1rem 0; 
+}
+
+.title {
+  color: white; 
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.title h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+
+
+.icon {
+  margin-right: 0.5rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #22c55e; /* text-green-500 */
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* space-y-4 */
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.itemTitle {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.chevron {
+  height: 1rem;
+  width: 1rem;
+  color: #a1a1aa; /* text-zinc-400 */
+}
+
+.itemDetails {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #71717a; /* text-zinc-600 */
+}
+
+.itemIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+.timeIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-left: 0.5rem;
+  margin-right: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .event-details {
+    color: #a1a1aa; /* dark:text-zinc-400 */
+  }
+} 

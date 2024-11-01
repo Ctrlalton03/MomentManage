@@ -1,17 +1,33 @@
-.container {
+
+
+
+.quickActionsHeading {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.actionCardsContainer {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
   }
   
-  .quickLink {
+  .actionLink {
     width: 30%;
   }
+
+  .quickActionsHeading{
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
   
-  .card {
+  .actionCard {
     height: 6rem;
     background-color: rgb(39, 39, 42);
-    border: 1px solid rgb(63, 63, 70);
     border-radius: 0.5rem;
     padding: 1rem;
     display: flex;
@@ -27,25 +43,26 @@
     border-color: rgb(59, 130, 246);
   }
   
-  .icon {
+  .actionIcon {
     height: 2rem;
     width: 2rem;
     margin-bottom: 0.5rem;
   }
   
-  .iconBlue {
+  .todoIcon {
     color: rgb(59, 130, 246);
   }
   
-  .iconGreen {
+  .calendarIcon {
     color: rgb(34, 197, 94);
   }
   
-  .iconPurple {
+  .journalIcon {
     color: rgb(168, 85, 247);
   }
   
-  .title {
+  .actionTitle {
+    color: white;
     font-size: 0.875rem;
     font-weight: 600;
   }
