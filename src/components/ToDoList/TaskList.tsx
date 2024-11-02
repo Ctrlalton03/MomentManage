@@ -66,7 +66,7 @@ const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
     return (
         <section>
             {isLoading ? (
-                <div>Loading...</div>
+                <div>Loading front page...</div>
             ) : (
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-semibold text-white">Current Tasks</h3>
