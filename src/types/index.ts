@@ -28,7 +28,9 @@ export interface Feature {
   export interface Task {
     id: string;
     name: string;
+    description: string;
     completed: boolean;
+    userId: string;
   }
 
   export interface TaskItemProps extends Task {

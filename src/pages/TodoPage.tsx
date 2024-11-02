@@ -39,7 +39,7 @@ const TodoPage: React.FC = () => {
           progress={progress}
         />
         <div className="space-y-8">
-          <TaskList onToggle={toggleTask} />
+          <TaskList tasks={tasks} onToggle={toggleTask} />
           <ProjectList projects={projects} />
         </div>
       </main>

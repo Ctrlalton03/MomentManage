@@ -11,14 +11,23 @@ import { db } from '@/config/firebase';
 import { useAuth } from '@/context/AuthContext'; // Adjust import path as needed
 
 interface TaskListProps {
-  onToggle: (id: string) => void;
+    tasks: Task[];
+    onToggle: (id: string) => void;
 }
 
 const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
 
+
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const { user } = useAuth(); // Get the current user
+    const { user } = useAuth(); 
+
+
+    const handleDelete = (deletedId: string) => {
+        setTasks(tasks.filter(task => task.id !== deletedId));
+    };
+
+
 
     useEffect(() => {
         if (!user) {
@@ -39,6 +48,7 @@ const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
                 const taskList = querySnapshot.docs.map(doc => ({
                     id: doc.id,
                     name: doc.data().name,
+                    description: doc.data().description,
                     completed: doc.data().completed,
                     userId: doc.data().userId
                 })) as Task[];
@@ -84,8 +94,13 @@ const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
                         {tasks.map((task) => (
                             <TaskItem
                                 key={task.id}
-                                {...task}
+                                id={task.id}
+                                name={task.name}
+                                description={task.description}
+                                completed={task.completed}
+                                userId={task.userId}
                                 onToggle={() => onToggle(task.id)}
+                                onDelete={handleDelete}
                             />
                         ))}
                     </ul>
