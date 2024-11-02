@@ -24,3 +24,19 @@ export interface Feature {
     action: string
     timestamp: string
   }
+
+  export interface Task {
+    id: string;
+    name: string;
+    completed: boolean;
+  }
+
+  export interface TaskItemProps extends Task {
+    onToggle: () => void;
+    }
+  
+
+  export interface Project {
+    id: number;
+    name: string;
+  }

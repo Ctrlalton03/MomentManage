@@ -5,6 +5,10 @@ import LoginPage from './pages/LoginPage';
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import DashboardPage from './pages/Dashboard';
+import TodoPage from './pages/TodoPage';
+import AddTaskPage from './pages/add-task';
+
+
 function App() {
   return (
     <AuthProvider>
@@ -14,6 +18,8 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/todo" element={<TodoPage />} />
+          <Route path="/add-task" element={<AddTaskPage />} />
         </Routes>
       </Router> 
     </AuthProvider>
