@@ -13,6 +13,7 @@ import { useState } from "react";
 const TodoPage: React.FC = () => {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
+  const [tasks] = useState<Task[]>([]);
   const projects: Project[] = [];
   
   return (
@@ -33,6 +34,7 @@ const TodoPage: React.FC = () => {
         />
 
         <TaskList 
+          tasks={tasks}
           onToggle={(_id: string) => {}} 
           onTasksChange={(tasks: Task[]): void => {
             setCompletedTasksCount(tasks.filter(task => task.completed).length);
