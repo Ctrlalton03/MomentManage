@@ -1,18 +1,21 @@
-// src/components/ProgressCard/ProgressCard.tsx
-import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
+
+import { Card, CardContent } from '@/components/ui/card';
+
+
 
 interface ProgressCardProps {
-  completedTasksCount: number;
-  totalTasks: number;
-  progress: number;
-}
+    completedTasksCount: number;
+    totalTasks: number;
+    progress: number;
+  }
 
-const ProgressCard: React.FC<ProgressCardProps> = ({ 
-  completedTasksCount, 
-  totalTasks, 
-  progress 
-}) => {
+
+
+const ProgressCard: React.FC<ProgressCardProps> = ({ completedTasksCount, totalTasks }) => {
+
+    const progress = totalTasks > 0 ? (completedTasksCount / totalTasks) * 100 : 0;
+
+
   return (
     <Card className="bg-blue-600 border-0 mb-8 overflow-hidden">
       <CardContent className="p-6">
@@ -36,7 +39,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
                       className="text-white"
                       strokeWidth="4"
                       strokeDasharray={188.5}
-                      strokeDashoffset={188.5 - (progress / 100) * 188.5}
+                      strokeDashoffset={`${188.5 - ((progress || 0) / 100) * 188.5}`}
                       strokeLinecap="round"
                       stroke="currentColor"
                       fill="transparent"

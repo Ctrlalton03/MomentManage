@@ -13,9 +13,11 @@ export interface Feature {
   }
 
   export interface TodoItem {
-    id: number
-    text: string
-    completed: boolean
+    id: string;  
+    text: string;
+    completed: boolean;
+    priority: string;
+    userId: string;
   }
   
   export interface ActivityItem {
@@ -42,3 +44,5 @@ export interface Feature {
     id: number;
     name: string;
   }
+
+  

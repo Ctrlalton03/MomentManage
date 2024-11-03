@@ -6,21 +6,40 @@ import { Plus } from "lucide-react";
 import { Link } from 'react-router-dom';
 import TaskItem from './TaskItem';
 import { Task } from '@/types';
-import { collection, query, where, orderBy, getDocs } from '@firebase/firestore';
+import { collection, query, where, orderBy, getDocs, updateDoc, doc } from '@firebase/firestore';
 import { db } from '@/config/firebase';
 import { useAuth } from '@/context/AuthContext'; // Adjust import path as needed
 
 interface TaskListProps {
     tasks: Task[];
     onToggle: (id: string) => void;
+    onTasksChange: (tasks: Task[]) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
-
-
+const TaskList: React.FC<TaskListProps> = ({ onTasksChange }) => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const { user } = useAuth(); 
+
+
+    const handleToggle = async (taskId: string) => {
+        const taskToUpdate = tasks.find(task => task.id === taskId);
+        if (!taskToUpdate) return;
+
+        try{
+            const taskRef = doc(db, 'tasks', taskId);
+            await updateDoc(taskRef, {
+                completed: !taskToUpdate.completed
+            });
+            setTasks(tasks.map(task => 
+                task.id === taskId 
+                    ? { ...task, completed: !task.completed }
+                    : task
+            ));
+        } catch (error) {
+            console.error('Error updating task:', error);
+        }
+    };
 
 
     const handleDelete = (deletedId: string) => {
@@ -65,6 +84,11 @@ const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
         fetchTasks();
     }, [user]);
 
+    useEffect(() => {
+        // Whenever tasks change, notify parent
+        onTasksChange(tasks);
+    }, [tasks, onTasksChange]);
+
     if (!user) {
         return (
             <div className="text-center py-4 text-gray-400">
@@ -99,7 +123,7 @@ const TaskList: React.FC<TaskListProps> = ({ onToggle }) => {
                                 description={task.description}
                                 completed={task.completed}
                                 userId={task.userId}
-                                onToggle={() => onToggle(task.id)}
+                                onToggle={handleToggle}
                                 onDelete={handleDelete}
                             />
                         ))}
