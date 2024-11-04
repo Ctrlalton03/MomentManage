@@ -1,0 +1,111 @@
+.container {
+  min-height: 100vh;
+  background-color: rgb(24 24 27);
+  color: white;
+  padding: 2rem;
+
+}
+
+.wrapper {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.backButton {
+  margin-bottom: 1.5rem;
+}
+
+.projectCard {
+  background-color: rgb(39 39 42);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.projectTitle {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.projectDescription {
+  color: rgb(212 212 216);
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(63 63 70);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.taskCompleted {
+  text-decoration: line-through;
+  color: rgb(161 161 170);
+}
+
+.statusBadge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.statusInProgress {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: rgb(147 197 253);
+}
+
+.statusCompleted {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: rgb(134 239 172);
+} 
+
+
+.sectionTitle{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+
+.projectTasks{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding: 1rem;
+}
+
+.addProjectTaskButton{
+    background-color: rgb(59 130 246);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.popoverContent{
+    width: 100%;
+}

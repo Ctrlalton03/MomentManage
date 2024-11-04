@@ -1,31 +1,84 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import styles from './ProjectDetails.module.css';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Input } from "@/components/ui/input"
 
+// Interface defining the shape of our project data
 interface ProjectDetails {
   id: string;
   name: string;
-  description?: string;
+  description?: string;  // Optional field
   createdAt: string;
-  tasks?: Array<{
+  tasks?: Array<{        // Optional array of task objects
     id: string;
     name: string;
     completed: boolean;
+    description?: string;  // Added to match Task type
+    userId: string;        // Added to match Task type
   }>;
-  // Add any other project details you want to display
 }
 
 const ProjectDetailsPage: React.FC = () => {
-  const { id } = useParams(); // Change from projectId to id
+  // Get the project ID from the URL parameters
+  const { id } = useParams();
+  // State to store the project details
   const [project, setProject] = useState<ProjectDetails | null>(null);
+  // Loading state to show loading indicator
   const [isLoading, setIsLoading] = useState(true);
+  const [newTaskName, setNewTaskName] = useState("");
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  //Add Handlers
+  const handleTaskToggle = async (taskId: string) => {
+    if (!project || !project.tasks) return;
+
+    const updatedTasks = project.tasks.map(task =>
+        task.id === taskId ? {...task, completed: !task.completed} : task
+    );
+
+    //update FireStone 
+    await updateDoc(doc(db, 'projects', id!), {
+        tasks: updatedTasks
+    });
+
+    setProject(prev => prev ? {...prev, tasks: updatedTasks} : null);
+  };
+
+  const handleAddTask = async () => {
+    if (!newTaskName.trim() || !project) return;
+
+    const newTask = {
+      id: crypto.randomUUID(),
+      name: newTaskName,
+      completed: false,
+      userId: "", // Add appropriate userId if needed
+      projectId: id,
+    };
+
+    const updatedTasks = [...(project.tasks || []), newTask];
+    
+    await updateDoc(doc(db, 'projects', id!), {
+      tasks: updatedTasks
+    });
+
+    setProject(prev => prev ? {...prev, tasks: updatedTasks} : null);
+    setNewTaskName("");
+    setIsPopoverOpen(false);
+  };
 
   useEffect(() => {
+    // Function to fetch project details from Firestore
     const fetchProjectDetails = async () => {
-
+      // Safety check for ID
       if (!id) {
         console.error('No project ID provided');
         setIsLoading(false);
@@ -33,8 +86,10 @@ const ProjectDetailsPage: React.FC = () => {
       }
 
       try {
+        // Fetch the project document from Firestore
         const projectDoc = await getDoc(doc(db, 'projects', id));
         if (projectDoc.exists()) {
+          // If document exists, set the project state with the data
           setProject({
             id: projectDoc.id,
             ...projectDoc.data()
@@ -48,60 +103,104 @@ const ProjectDetailsPage: React.FC = () => {
     };
 
     fetchProjectDetails();
-  }, [id]);
+  }, [id]); // Re-run effect when ID changes
 
+  // Show loading state while fetching data
   if (isLoading) {
     return <div>Loading project details...</div>;
   }
 
+  // Show error state if project not found
   if (!project) {
     return <div>Project not found</div>;
   }
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-white p-8">
-      <div className="max-w-4xl mx-auto">
+    // Main container for the entire page
+    <div className={styles.container}>
+      {/* Wrapper for content alignment */}
+      <div className={styles.wrapper}>
+        {/* Back button navigation that links to the todo page */}
         <Link to="/todo">
-          <Button variant="ghost" className="mb-6">
-            <ArrowLeft className="mr-2 h-4 w-4" />
+          <Button variant="ghost" className={styles.backButton}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> {/* Arrow icon with margin */}
             Back to Projects
           </Button>
         </Link>
 
-        <div className="bg-zinc-800 rounded-lg p-6 shadow-lg">
-          <h1 className="text-3xl font-bold mb-4">{project.name}</h1>
+        {/* Main project information card */}
+        <div className={styles.projectCard}>
+          {/* Project name section */}
+          <h3>Project Name:</h3>
+          <h1 className={styles.projectTitle}>{project.name}</h1>
           
+          {/* Project description section - only shows if description exists */}
+          <h3>Project Description:</h3>
           {project.description && (
-            <p className="text-zinc-300 mb-6">{project.description}</p>
+            <p className={styles.projectDescription}>{project.description}</p>
           )}
 
+          {/* Project details section showing creation date */}
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-3">Project Details</h2>
-            <p className="text-zinc-300">Created: {new Date(project.createdAt).toLocaleDateString()}</p>
+            <h2 className={styles.sectionTitle}>Project Details</h2>
+            <p className={styles.projectDescription}>
+              Created: {new Date(project.createdAt).toLocaleDateString()}
+            </p>
           </div>
 
-          {project.tasks && project.tasks.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-3">Tasks</h2>
-              <ul className="space-y-2">
+          {/* Tasks section - only renders if there are tasks */}
+          <div>
+            <div className={styles.projectTasks}>
+              <h2 className={styles.sectionTitle}>Tasks</h2>
+              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                <PopoverTrigger asChild>
+                  <button 
+                    className={styles.addProjectTaskButton} 
+                    onClick={() => setIsPopoverOpen(true)}
+                  >
+                    Add Project task
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className={styles.popoverContent}>
+                  <div className="grid gap-4">
+                    <h4 className="font-medium leading-none">Add New Task</h4>
+                    <div className="grid gap-2">
+                      <Input
+                        id="taskName"
+                        value={newTaskName}
+                        onChange={(e) => setNewTaskName(e.target.value)}
+                        placeholder="Enter task name"
+                      />
+                      <Button onClick={handleAddTask}>Add Task</Button>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+            
+            {/* Only show task list if there are tasks */}
+            {project.tasks && project.tasks.length > 0 && (
+              <ul className={styles.taskList}>
                 {project.tasks.map(task => (
                   <li 
                     key={task.id}
-                    className="flex items-center justify-between bg-zinc-700 p-3 rounded"
+                    className={styles.taskItem}
+                    onClick={() => handleTaskToggle(task.id)}
+                    style={{ cursor: 'pointer' }}
                   >
-                    <span className={task.completed ? 'line-through text-zinc-400' : ''}>
+                    <span className={task.completed ? styles.taskCompleted : ''}>
                       {task.name}
                     </span>
-                    <span className={`px-2 py-1 rounded text-sm ${
-                      task.completed ? 'bg-green-500/20 text-green-300' : 'bg-blue-500/20 text-blue-300'
+                    <span className={`${styles.statusBadge} ${
+                      task.completed ? styles.statusCompleted : styles.statusInProgress
                     }`}>
                       {task.completed ? 'Completed' : 'In Progress'}
                     </span>
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
