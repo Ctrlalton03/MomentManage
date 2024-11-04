@@ -41,8 +41,15 @@ export interface Feature {
   
 
   export interface Project {
-    id: number;
+    id: string;
     name: string;
+    description?: string;
+    createdAt: string;
+    tasks?: Array<{
+      id: string;
+      name: string;
+      completed: boolean;
+    }>;
   }
 
   

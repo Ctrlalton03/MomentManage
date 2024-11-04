@@ -1,0 +1,71 @@
+.container {
+  margin-top: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+}
+
+.addButton {
+  padding: 0.5rem 1rem;
+  background-color: rgb(59 130 246);
+  color: white;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.addIcon {
+    height: 1rem;
+    width: 1rem;
+  } 
+
+.addButton:hover {
+  background-color: rgb(37 99 235);
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.projectItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(39 39 42);
+  border-radius: 0.25rem;
+  color: white;
+}
+
+.loadingContainer {
+  margin-top: 1rem;
+}
+
+.projectItem button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+} 

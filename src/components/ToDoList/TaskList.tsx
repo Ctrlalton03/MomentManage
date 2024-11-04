@@ -8,7 +8,8 @@ import TaskItem from './TaskItem';
 import { Task } from '@/types';
 import { collection, query, where, orderBy, getDocs, updateDoc, doc } from '@firebase/firestore';
 import { db } from '@/config/firebase';
-import { useAuth } from '@/context/AuthContext'; // Adjust import path as needed
+import { useAuth } from '@/context/AuthContext'; 
+import styles from './TaskList.module.css';
 
 interface TaskListProps {
     tasks: Task[];
@@ -91,30 +92,30 @@ const TaskList: React.FC<TaskListProps> = ({ onTasksChange }) => {
 
     if (!user) {
         return (
-            <div className="text-center py-4 text-gray-400">
+            <div className={styles.signInMessage}>
                 Please sign in to view your tasks
             </div>
         );
     }
 
     return (
-        <section>
+        <section className={styles.container}>
             {isLoading ? (
-                <div>Loading front page...</div>
+                <div className={styles.loadingMessage}>Loading front page...</div>
             ) : (
-                <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-semibold text-white">Current Tasks</h3>
+                <div className={styles.header}>
+                    <h3 className={styles.title}>Current Tasks</h3>
                     <Link to="/add-task">
-                        <Button variant="secondary">
-                            <Plus className="h-4 w-4 mr-2" />
+                        <Button variant="secondary" className={styles.addButton}>
+                            <Plus className={styles.addIcon} />
                             Add Task
                         </Button>
                     </Link>
                 </div>
             )}
-            <Card className="bg-zinc-800/50 border-zinc-700">
-                <CardContent className="p-4 space-y-4">
-                    <ul className="space-y-2">
+            <Card className={styles.taskCard}>
+                <CardContent className={styles.cardContent}>
+                    <ul className={styles.taskList}>
                         {tasks.map((task) => (
                             <TaskItem
                                 key={task.id}
