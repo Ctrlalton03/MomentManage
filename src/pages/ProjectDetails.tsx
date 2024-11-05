@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Trash2 } from 'lucide-react';
 import styles from './ProjectDetails.module.css';
 import {
   Popover,
@@ -51,6 +51,26 @@ const ProjectDetailsPage: React.FC = () => {
     });
 
     setProject(prev => prev ? {...prev, tasks: updatedTasks} : null);
+  };
+
+  //delete the task from the project list
+  const handleDeleteTask = async (taskId: string) => {
+    if (!project || !project.tasks) return;
+
+    //filter out the task to be deleted
+    const updatedTasks = project.tasks.filter(task => task.id !== taskId);
+
+    try{
+    //update Firestore
+    await updateDoc(doc(db, 'projects', id!), {
+        tasks: updatedTasks
+    });
+
+    //update the project state
+    setProject(prev => prev ? {...prev, tasks: updatedTasks} : null);
+    } catch (error) {
+        console.error('Error deleting task:', error);
+    }
   };
 
   const handleAddTask = async () => {
@@ -131,18 +151,18 @@ const ProjectDetailsPage: React.FC = () => {
         {/* Main project information card */}
         <div className={styles.projectCard}>
           {/* Project name section */}
-          <h3>Project Name:</h3>
-          <h1 className={styles.projectTitle}>{project.name}</h1>
+          <h2 className={styles.sectionTitle}>Project Name:</h2>
+          <p className={styles.projectTitle}>{project.name}</p>
           
           {/* Project description section - only shows if description exists */}
-          <h3>Project Description:</h3>
+          <h2 className={styles.sectionTitle}>Project Description:</h2>
           {project.description && (
             <p className={styles.projectDescription}>{project.description}</p>
           )}
 
           {/* Project details section showing creation date */}
           <div className="mb-6">
-            <h2 className={styles.sectionTitle}>Project Details</h2>
+            <h2 className={styles.sectionTitle}>Was Made:</h2>
             <p className={styles.projectDescription}>
               Created: {new Date(project.createdAt).toLocaleDateString()}
             </p>
@@ -151,7 +171,6 @@ const ProjectDetailsPage: React.FC = () => {
           {/* Tasks section - only renders if there are tasks */}
           <div>
             <div className={styles.projectTasks}>
-              <h2 className={styles.sectionTitle}>Tasks</h2>
               <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
                 <PopoverTrigger asChild>
                   <button 
@@ -161,17 +180,24 @@ const ProjectDetailsPage: React.FC = () => {
                     Add Project task
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className={styles.popoverContent}>
+                <PopoverContent 
+                className={styles.popoverContent}
+                side="top" 
+                align="center" 
+                sideOffset={5}
+                onClick={(e) => e.stopPropagation()}
+                >
                   <div className="grid gap-4">
-                    <h4 className="font-medium leading-none">Add New Task</h4>
+                    <h4 className={styles.popoverTitle}>Add New Project Task</h4>
                     <div className="grid gap-2">
                       <Input
-                        id="taskName"
+                        className={styles.taskInput}
                         value={newTaskName}
                         onChange={(e) => setNewTaskName(e.target.value)}
                         placeholder="Enter task name"
+                        onClick={(e) => e.stopPropagation()}
                       />
-                      <Button onClick={handleAddTask}>Add Task</Button>
+                      <Button onClick={handleAddTask} className={styles.addTaskButton}>Add Task</Button>
                     </div>
                   </div>
                 </PopoverContent>
@@ -188,7 +214,7 @@ const ProjectDetailsPage: React.FC = () => {
                     onClick={() => handleTaskToggle(task.id)}
                     style={{ cursor: 'pointer' }}
                   >
-                    <span className={task.completed ? styles.taskCompleted : ''}>
+                    <span className={`${styles.taskName} ${task.completed ? styles.taskCompleted : ''}`}>
                       {task.name}
                     </span>
                     <span className={`${styles.statusBadge} ${
@@ -196,6 +222,19 @@ const ProjectDetailsPage: React.FC = () => {
                     }`}>
                       {task.completed ? 'Completed' : 'In Progress'}
                     </span>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (window.confirm('Are you sure you want to delete this task?')) {
+                          handleDeleteTask(task.id);
+                        }
+                      }}
+                      className={styles.deleteTaskButton}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </li>
                 ))}
               </ul>
