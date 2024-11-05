@@ -83,8 +83,7 @@ const Header: React.FC = () => {
             </Link>
             <Link to="/signup">
             <Button 
-              variant="outline" 
-              className={classes['mobile-menu-button']}
+              className={classes['mobile-menu-link']}
               onClick={toggleMenu}
             >
               Sign up
@@ -92,8 +91,7 @@ const Header: React.FC = () => {
             </Link>
             <Link to="/login">
             <Button 
-              variant="outline" 
-              className={classes['mobile-menu-button']}
+              className={classes['mobile-menu-link']}
               onClick={toggleMenu}
             >
               Login

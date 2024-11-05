@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "@firebase/firestore";
 import { db } from "@/config/firebase";
-import { useAuth } from '@/context/AuthContext'; 
-
-
+import { useAuth } from '@/context/AuthContext';
+import styles from './ProjectForm.module.css';
 
 const ProjectForm: React.FC = () => {
 
@@ -53,23 +52,14 @@ const ProjectForm: React.FC = () => {
         navigate('/todo');
     };
 
-
-
-
-
-
-
-
-
-
-
-
     return (
-        <div>
-            <h2>Create new Project</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="projectName">Project Name</label>
+        <div className={styles.container}>
+            <h2 className={styles.title}>Create New Project</h2>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.fieldGroup}>
+                    <label htmlFor="projectName" className={styles.label}>
+                        Project Name
+                    </label>
                     <input 
                         type="text"
                         id="projectName"
@@ -77,31 +67,44 @@ const ProjectForm: React.FC = () => {
                         onChange={(e) => setProjectName(e.target.value)}
                         placeholder="Enter project name"
                         disabled={isLoading}
+                        className={styles.input}
                     />
                 </div> 
-                <div>
-                    <label htmlFor="projectDescription">Description</label>
+                <div className={styles.fieldGroup}>
+                    <label htmlFor="projectDescription" className={styles.label}>
+                        Description
+                    </label>
                     <textarea
                         id="projectDescription"
                         value={projectDescription}
                         onChange={(e) => setProjectDescription(e.target.value)}
                         placeholder="Enter project description"
                         disabled={isLoading}
+                        className={styles.textarea}
                     />
                 </div>
                 {error && (
-                    <div>{error}</div>
+                    <div className={styles.error}>{error}</div>
                 )}
-                <div>
-                    <button type="submit" disabled={isLoading}>
+                <div className={styles.buttonGroup}>
+                    <button 
+                        type="submit" 
+                        disabled={isLoading}
+                        className={styles.submitButton}
+                    >
                         {isLoading ? 'Creating...' : 'Create'}
                     </button>
-                    <button type="button" onClick={handleCancel} disabled={isLoading}>Cancel</button>
+                    <button 
+                        type="button" 
+                        onClick={handleCancel} 
+                        disabled={isLoading}
+                        className={styles.cancelButton}
+                    >
+                        Cancel
+                    </button>
                 </div>
             </form>
         </div>
-
-
     );
 };
 

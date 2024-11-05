@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Button } from "../../components/ui/button"
 import heroStyles from '../../styles/modules/hero.module.css'
+import { Link } from "react-router-dom"
 
 const HeroSection: React.FC = () => {
     const [isMobile, setIsMobile] = useState(false)
@@ -35,9 +36,11 @@ const HeroSection: React.FC = () => {
           )}
         </p>
         <div className={heroStyles['hero-actions']}>
-          <Button className={heroStyles['hero-button']}>
-            Get Started
-          </Button>
+          <Link to="/signup">
+            <Button className={heroStyles['hero-button']}>
+              Get Started
+            </Button>
+          </Link>
           <Button className={heroStyles['hero-button-white']}>
             Learn More
           </Button>
