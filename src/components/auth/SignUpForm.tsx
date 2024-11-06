@@ -4,7 +4,7 @@ import { FormData, ValidationErrors } from '../../types/auth';
 import { validateForm } from '../../utils/validation';
 import PasswordInput from '../auth/PasswordInput';
 import LoadingButton from '../../components/ui/LoadingButton';
-import classes from '../../styles/modules/SignUpForm.module.css';
+import classes from '../../styles/modules/Auth/SignUpForm.module.css';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';   
 import { db, auth } from '../../config/firebase';

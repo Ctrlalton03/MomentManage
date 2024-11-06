@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CheckCircle, Calendar as CalendarIcon, Book } from "lucide-react"
-import styles from "@/styles/modules/QuickActions.module.css"
+import styles from "@/styles/modules/Dashboard/QuickActions.module.css"
 
 export const QuickActions: React.FC = () => {
   return (

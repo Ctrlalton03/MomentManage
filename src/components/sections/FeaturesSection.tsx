@@ -2,7 +2,7 @@ import React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle, Calendar, FileText } from "lucide-react"
 import type { Feature } from "@/types"
-import featuresStyles from '../../styles/modules/features.module.css'
+import featuresStyles from '../../styles/modules/Home/features.module.css'
 
 const features: Feature[] = [
   {
@@ -32,7 +32,7 @@ const FeaturesSection: React.FC = () => {
         <div className={featuresStyles['features-grid']}>
           {features.map((feature, index) => (
             <Card key={index} className={featuresStyles['feature-card']}>
-              <CardHeader>
+              <CardHeader className={featuresStyles['feature-card-header']}>
                 <feature.icon className={featuresStyles['feature-icon']} />
                 <CardTitle className={featuresStyles['feature-title']}>
                   {feature.title}

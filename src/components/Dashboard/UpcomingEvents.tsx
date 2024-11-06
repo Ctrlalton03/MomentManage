@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { CalendarIcon, ChevronRight, Clock } from "lucide-react"
-import styles from '@/styles/modules/UpcomingEvents.module.css'
+import styles from '@/styles/modules/Dashboard/UpcomingEvents.module.css'
 
 interface UpcomingEventsProps {
   events: {

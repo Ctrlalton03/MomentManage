@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import styles from '../../styles/modules/PasswordInput.module.css';
+import styles from '../../styles/modules/Auth/PasswordInput.module.css';
 
 interface PasswordInputProps {
   name: string;

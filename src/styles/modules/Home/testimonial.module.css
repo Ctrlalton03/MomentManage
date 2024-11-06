@@ -1,0 +1,108 @@
+.testimonial-section {
+    background-color: #121212;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.testimonial-section-heading {
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: white;
+}
+
+.testimonial-icon {
+    height: 1rem;
+    width: 1rem;
+    color: #6b7280; /* equivalent to text-gray-500 */
+    margin-left: 0.5rem;
+    display: inline-block;
+  }
+
+.testimonial-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background-color: rgb(63, 63, 70);
+    border-color: rgb(82, 82, 91);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    transition: all 300ms ease-in-out;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.testimonial-card:hover {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    background-color: rgb(82, 82, 91);
+}
+
+.testimonial-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #60a5fa;
+    margin-right: 0.75rem;
+    display: inline-block;
+}
+
+.testimonial-title {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-description {
+    color: rgb(212, 212, 216);
+    margin-top: 1rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.testimonial-card :global(.card-header) {
+    padding: 1rem 1.5rem;
+}
+
+.testimonial-card :global(.card-content) {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.testimonial-profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-title-container {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .testimonial-section-heading {
+        font-size: 2.25rem;
+    }
+    .testimonial-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+} 

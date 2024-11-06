@@ -4,7 +4,7 @@ import { CheckCircle2, Trash2 } from "lucide-react";
 import { deleteDoc, doc } from '@firebase/firestore';
 import { db, auth } from '@/config/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-
+import styles from '@/styles/modules/ToDoList/TaskItem.module.css';
 
 interface TaskItemProps {
     name: string;
@@ -53,23 +53,24 @@ const TaskItem: React.FC<TaskItemProps> = ({ name, completed, id, userId, onTogg
     };
 
   return (
-    <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-zinc-700/50 transition-colors">
+    <li className={styles.taskItem}>
       <button
         onClick={() => onToggle(id)}
-        className={`h-5 w-5 rounded-full border-2 flex items-center justify-center transition-colors
-          ${completed ? 'bg-blue-500 border-blue-500' : 'border-zinc-500'}`}
+        className={`${styles.toggleButton} ${
+          completed ? styles.toggleButtonCompleted : styles.toggleButtonUncompleted
+        }`}
       >
-        {completed && <CheckCircle2 className="h-4 w-4 text-white" />}
+        {completed && <CheckCircle2 className={styles.checkIcon} />}
       </button>
-      <span className={`flex-grow text-white ${completed ? 'line-through text-zinc-500' : ''}`}>
+      <span className={`${styles.taskName} ${completed ? styles.taskNameCompleted : ''}`}>
         {name}
       </span>
 
       <button 
       onClick={handleDelete}
-      className="text-red-500 hover:text-red-600"
+      className={styles.deleteButton}
       >
-        <Trash2 className="h-4 w-4" />
+        <Trash2 className={styles.trashIcon} />
       </button>
     </li>
   );

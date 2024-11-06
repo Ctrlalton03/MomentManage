@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import styles from '@/styles/modules/DashboardHeader.module.css'
+import styles from '@/styles/modules/layout/DashboardHeader.module.css'
 
 interface HeaderProps {
   username: string

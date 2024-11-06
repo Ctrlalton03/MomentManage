@@ -10,7 +10,7 @@ import { TodoItem, ActivityItem } from "@/types"
 import { useNavigate } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth, db } from '../config/firebase'
-import styles from '@/styles/modules/Dashboard.module.css'
+import styles from '@/styles/modules/pages/Dashboard.module.css'
 import { getDoc, doc, collection, query, where, getDocs, updateDoc } from "firebase/firestore"
 import  UpcomingEvents  from "@/components/Dashboard/UpcomingEvents"
 import { Card, CardContent } from "@/components/ui/card"

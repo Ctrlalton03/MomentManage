@@ -3,7 +3,7 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import SignUpForm from '../components/auth/SignUpForm';
 import { FormData } from '../types/auth';
-import styles from '../styles/modules/SignUpPage.module.css';
+import styles from '../styles/modules/pages/SignUpPage.module.css';
 
 const SignUpPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);

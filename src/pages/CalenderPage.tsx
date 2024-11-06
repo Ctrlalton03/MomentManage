@@ -7,7 +7,7 @@ import { db } from "@/config/firebase"
 import { collection, addDoc, deleteDoc, doc, query, where, onSnapshot } from "firebase/firestore"
 import { useAuth } from "@/context/AuthContext"
 import { useNavigate } from "react-router-dom"
-import styles from '@/pages/CalendarPage.module.css'
+import styles from '@/styles/modules/Calender/CalendarPage.module.css'
 
 
 const CalendarPage: React.FC = () => {

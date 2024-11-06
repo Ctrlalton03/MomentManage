@@ -1,4 +1,4 @@
-import footerStyles from '../../styles/modules/footer.module.css'
+import footerStyles from '../../styles/modules/layout/footer.module.css'
 import { Link } from "react-router-dom"
 
 

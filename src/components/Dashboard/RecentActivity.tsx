@@ -3,7 +3,7 @@ import React from 'react'
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, Calendar as CalendarIcon, Book, Clock } from "lucide-react"
 import { ActivityItem } from '@/types'
-import styles from '@/styles/modules/RecentActivity.module.css'
+import styles from '@/styles/modules/Dashboard/RecentActivity.module.css'
 
 interface RecentActivityProps {
   activities: ActivityItem[]

@@ -20,10 +20,21 @@ const CreateEventDialog: React.FC<CreateEventDialogProps> = ({ onEventCreate }) 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
+
+
+
+    const selectedDate = new Date(date)
+    const timezoneOffset = selectedDate.getTimezoneOffset() * 60000
+    const adjustedDate = new Date(selectedDate.getTime() - timezoneOffset)
+
+
+
+
+
     onEventCreate({
       title,
       type: type as keyof typeof eventTypes,
-      date: new Date(date),
+      date: adjustedDate,
       userId: user.uid,
       createdAt: new Date()
     })

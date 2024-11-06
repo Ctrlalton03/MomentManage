@@ -1,7 +1,7 @@
 import React from "react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import type { Testimonial } from "@/types"
-import testimonialStyles from "../../styles/modules/testimonial.module.css"
+import testimonialStyles from "../../styles/modules/Home/testimonial.module.css"
 const testimonials: Testimonial[] = [
   {
     profilePicture: "/images/Profile1.jpg",

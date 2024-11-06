@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import classes from '@/styles/header.module.css'
+import classes from '@/styles/modules/layout/Header.module.css'
 
 
 const Header: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Button } from "../../components/ui/button"
-import heroStyles from '../../styles/modules/hero.module.css'
+import heroStyles from '../../styles/modules/Home/hero.module.css'
 import { Link } from "react-router-dom"
 
 const HeroSection: React.FC = () => {

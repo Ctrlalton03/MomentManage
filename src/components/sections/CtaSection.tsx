@@ -1,6 +1,6 @@
 import React from "react"
 import { Button } from "../../components/ui/button"
-import ctaStyles from "../../styles/modules/CtaSection.module.css"
+import ctaStyles from "../../styles/modules/Home/CtaSection.module.css"
 
 const CtaSection: React.FC = () => {
   return (

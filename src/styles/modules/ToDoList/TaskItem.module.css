@@ -1,0 +1,61 @@
+.taskItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.taskItem:hover {
+  background-color: rgba(63, 63, 70, 0.5); /* zinc-700 with 50% opacity */
+}
+
+.toggleButton {
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.toggleButtonCompleted {
+  background-color: #3b82f6; /* blue-500 */
+  border-color: #3b82f6;
+}
+
+.toggleButtonUncompleted {
+  border-color: #71717a; /* zinc-500 */
+}
+
+.taskName {
+  flex-grow: 1;
+  color: white;
+}
+
+.taskNameCompleted {
+  text-decoration: line-through;
+  color: #71717a; /* zinc-500 */
+}
+
+.deleteButton {
+  color: #ef4444; /* red-500 */
+}
+
+.deleteButton:hover {
+  color: #dc2626; /* red-600 */
+}
+
+.checkIcon {
+  height: 1rem;
+  width: 1rem;
+  color: white;
+}
+
+.trashIcon {
+  height: 1rem;
+  width: 1rem;
+} 
