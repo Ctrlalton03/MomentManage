@@ -10,6 +10,7 @@ import TodoPage from './pages/TodoPage';
 import AddTaskPage from './pages/add-task';
 import ProjectForm from './components/ToDoList/Project-Form';
 import ProjectDetailsPage from './pages/ProjectDetails';
+import CalendarPage from './pages/CalenderPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/add-task" element={<AddTaskPage />} />
           <Route path="/add-project" element={<ProjectForm />} />
           <Route path="/project/:id" element={<ProjectDetailsPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
       </Router> 
     </AuthProvider>

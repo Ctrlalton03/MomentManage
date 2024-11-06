@@ -1,0 +1,40 @@
+.container {
+  min-height: 100vh;
+  background-color: rgb(24 24 27); /* bg-zinc-900 */
+}
+
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem; /* py-8 px-4 */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem; /* gap-8 */
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem; /* mb-6 */
+  margin-left: 1.5rem; /* ml-6 */
+  color: rgb(212 212 216); /* text-zinc-300 */
+}
+
+.backButton:hover {
+  color: white;
+}
+
+.backIcon {
+  height: 1.25rem; /* h-5 */
+  width: 1.25rem; /* w-5 */
+  margin-right: 0.5rem; /* mr-2 */
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+} 

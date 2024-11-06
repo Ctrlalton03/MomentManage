@@ -9,7 +9,7 @@ import { Task } from '@/types';
 import { collection, query, where, orderBy, getDocs, updateDoc, doc } from '@firebase/firestore';
 import { db } from '@/config/firebase';
 import { useAuth } from '@/context/AuthContext'; 
-import styles from './TaskList.module.css';
+import styles from '@/styles/modules/ToDoList/TaskList.module.css';
 
 interface TaskListProps {
     tasks: Task[];

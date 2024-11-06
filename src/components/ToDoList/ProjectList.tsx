@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Link } from 'react-router-dom';
 import { Project } from '@/types';
-import styles from './ProjectList.module.css';
+import styles from '@/styles/modules/ToDoList/ProjectList.module.css';
 import { Button } from '../ui/button';
 import { Plus, Trash2 } from 'lucide-react';
 import { doc, deleteDoc } from 'firebase/firestore';

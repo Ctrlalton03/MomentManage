@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "@firebase/firestore";
 import { db } from "@/config/firebase";
 import { useAuth } from '@/context/AuthContext';
-import styles from './ProjectForm.module.css';
+import styles from '@/styles/modules/ToDoList/ProjectForm.module.css';
 
 const ProjectForm: React.FC = () => {
 
