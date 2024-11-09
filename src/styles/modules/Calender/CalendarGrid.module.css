@@ -1,5 +1,5 @@
 .card {
-  background-color: rgb(47, 47, 246);
+  background-color: rgb(255, 255, 255);
   width: 100%;
   max-width: 800px;
   border: none;
@@ -21,7 +21,7 @@
 
 
 .calendar [aria-live="polite"] {
-  color: white !important;
+  color: rgb(20, 32, 255) !important;
   font-size: 1.2rem !important;  /* Adjust size as needed */
 }
 
@@ -60,7 +60,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
-  color: white !important;
+  color: rgb(20, 32, 255) !important;
   width: calc(100% / 7) !important;
 }
 

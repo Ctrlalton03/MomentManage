@@ -1,0 +1,37 @@
+.header {
+    border-bottom: 1px solid rgb(39, 39, 42); /* zinc-800 */
+    background-color: rgb(24, 24, 27); /* zinc-900/50 */
+    backdrop-filter: blur(24px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .container {
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+  }
+  
+  .subtitle {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    color: white;
+  }
+  
+  .avatar {
+    height: 2.5rem;
+    width: 2.5rem;
+  }

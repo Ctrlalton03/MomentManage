@@ -1,0 +1,53 @@
+
+
+
+.trigger {
+    background-color: #0048ff;
+}
+
+
+.Dialogtitle{
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+
+
+.dialogContent{
+    width: 90%;
+    border-radius: 10px;
+    background-color: #323232;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inputContainer{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.inputContainer textarea{
+    background-color: #323232;
+    color: white;
+}
+
+.inputContainer input{
+    background-color: #323232;
+    color: white;
+}
+
+.inputContainer label{
+    color: white;
+    font-size: 1.2rem;
+}
+
+.submitButton{
+    width: 100%;
+    background-color: #0048ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

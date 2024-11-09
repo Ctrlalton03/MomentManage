@@ -1,6 +1,5 @@
 .container {
-  max-width: 42rem;
-  margin: 0 auto;
+  max-width: 100%;
   padding: 1.5rem;
   height: 100vh;
   background-color: #1f2937;
@@ -8,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
 }
 
 .title {

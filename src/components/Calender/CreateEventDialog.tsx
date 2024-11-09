@@ -25,7 +25,7 @@ const CreateEventDialog: React.FC<CreateEventDialogProps> = ({ onEventCreate }) 
 
     const selectedDate = new Date(date)
     const timezoneOffset = selectedDate.getTimezoneOffset() * 60000
-    const adjustedDate = new Date(selectedDate.getTime() - timezoneOffset)
+    const adjustedDate = new Date(selectedDate.getTime() + timezoneOffset)
 
 
 

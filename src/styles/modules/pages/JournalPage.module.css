@@ -1,0 +1,28 @@
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: rgb(24, 24, 27);
+}
+
+
+.backButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(61, 61, 253);
+    color: white;
+    max-width: 200px;
+    width: 50%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin: 10px;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
