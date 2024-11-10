@@ -8,17 +8,18 @@ import styles from '@/styles/modules/Dashboard/UpcomingEvents.module.css'
 
 
 interface CalendarEvent {
-    id: string;
-    title: string;
-    date: Date;
-    time: string;
-    userId: string;
-  };
+  id: string;
+  title: string;
+  date: Date;
+  time: string;
+  userId: string;
+}
+
 
 
 const UpcomingEvents: React.FC = () => {
 
-  const [events, setEvents] = useState<CalendarEvent[]>([])
+  const [localEvents, setLocalEvents] = useState<CalendarEvent[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth();
 
@@ -40,7 +41,7 @@ const UpcomingEvents: React.FC = () => {
           date: new Date(docs.data().date.toDate())
         })) as CalendarEvent[];
 
-        setEvents(eventsList);
+        setLocalEvents(eventsList);
       } catch (error) {
         console.error('Error fetching events:', error);
       } finally {
@@ -65,7 +66,7 @@ const UpcomingEvents: React.FC = () => {
         <Card className={styles.card}>
             <CardContent>
                 <ul className={styles.list}>
-                {events.map((event) => (
+                {localEvents.map((event) => (
                 <li key={event.id} className={styles.item}>
                 <div className={styles.itemHeader}>
                     <span className={styles.itemTitle}>{event.title}</span>

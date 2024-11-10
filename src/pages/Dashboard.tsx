@@ -28,11 +28,7 @@ const DashboardPage: React.FC = () => {
     { id: 4, type: 'todo', action: 'Completed task: Update client presentation', timestamp: 'Yesterday at 3:15 PM' },
   ])
   const navigate = useNavigate()
-  const [events] = useState([
-    { id: 1, title: "Team Meeting", date: "2024-03-20", time: "10:00 AM" },
-    { id: 2, title: "Project Deadline", date: "2024-03-22", time: "5:00 PM" },
-    { id: 3, title: "Client Presentation", date: "2024-03-25", time: "2:30 PM" },
-  ])
+
 
 
   useEffect (() => {
@@ -152,7 +148,7 @@ const DashboardPage: React.FC = () => {
           )}
         </section>
         <QuickActions />
-        <UpcomingEvents events={events} />
+        <UpcomingEvents />
         <section className={styles.activitySection}>
           <RecentActivity activities={recentActivities} />
         </section>
