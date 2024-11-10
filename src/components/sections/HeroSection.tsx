@@ -41,9 +41,11 @@ const HeroSection: React.FC = () => {
               Get Started
             </Button>
           </Link>
-          <Button className={heroStyles['hero-button-white']}>
-            Learn More
-          </Button>
+          <Link to="/login">
+            <Button className={heroStyles['hero-button']}>
+              Sign In
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
