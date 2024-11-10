@@ -6,6 +6,7 @@ import { db } from "@/config/firebase"
 import { collection, query, orderBy, onSnapshot, where, doc, deleteDoc } from "@firebase/firestore"
 import { useState, useEffect } from "react"
 import { Trash2 } from "lucide-react"
+import { Link } from "react-router-dom"
 
 
 
@@ -20,6 +21,7 @@ interface EntryListProps {
   
   export function EntryList({ entries, onEntryClick, onNewEntry }: EntryListProps) {
     const [localEntries, setLocalEntries] = useState<JournalEntry[]>(entries)
+    const [loading, setLoading] = useState(true)
     const [deletingId, setDeletingId] = useState<string | null>(null)
     const { user } = useAuth()
 
@@ -60,6 +62,7 @@ interface EntryListProps {
               ...doc.data()
           } as JournalEntry));
           setLocalEntries(entriesList);
+          setLoading(false);
       });
   
       return () => unsubscribe();
@@ -71,22 +74,40 @@ interface EntryListProps {
                 <NewEntryDialog onNewEntry={onNewEntry}/>
             </div> 
             <div className={styles.entriesList}>
-                {localEntries.map((entry) => (
-                    <div className={styles.entryItem} key={entry.id} onClick={() => onEntryClick(entry)}>
-                        <h2 className={styles.entryTitle}>{entry.title}</h2>
-                        <button 
-                            onClick={() => handleDelete(entry.id)}
-                            className="text-red-500 hover:text-red-600"
-                            disabled={deletingId === entry.id}
-                        >
-                            {deletingId === entry.id ? (
-                                <span className="animate-spin">🔄</span>
-                            ) : (
-                                <Trash2 className="h-4 w-4" />
-                            )}
-                        </button>
-                    </div>
-                ))}
+                {loading ? (
+                    <p>Loading Entries...</p>
+                ): localEntries.length === 0 ? (
+                    <p className={styles.noEntries}>No entries found</p>
+                ): (
+                    <ul className={styles.entriesList}>
+                        {localEntries.map((entry) => (
+                            <li key={entry.id} className={styles.entryItem}>
+                                <Link 
+                                    to={`/journal/${entry.id}`}
+                                    className={styles.entryTitle}
+                                    onClick={() => onEntryClick(entry)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <h2>{entry.title}</h2>
+                                </Link>
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDelete(entry.id);
+                                    }}
+                                    className="text-red-500 hover:text-red-600"
+                                    disabled={deletingId === entry.id}
+                                >
+                                    {deletingId === entry.id ? (
+                                        <span className="animate-spin">🔄</span>
+                                    ) : (
+                                        <Trash2 className="h-4 w-4" />
+                                    )}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
       </div>
     )

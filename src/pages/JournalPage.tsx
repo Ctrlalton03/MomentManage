@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import styles from "@/styles/modules/pages/JournalPage.module.css"
 import EntryList from "@/components/Journal/EntryList"
 import { JournalEntry, NewEntryData } from "@/components/Journal/journal"
-
+import EntryDetails from "@/components/Journal/EntryDetails"
 const JournalPage: React.FC = () => {
     // Implement state management:
     
@@ -52,6 +52,7 @@ const JournalPage: React.FC = () => {
                 onEntryClick={handleEntryClick} 
                 onNewEntry={handleNewEntry}/>
             {/* EntryDetail (when not mobile) */}
+            <EntryDetails />
             </div>
             
         </div>
