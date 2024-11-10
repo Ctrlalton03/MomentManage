@@ -85,7 +85,10 @@ interface EntryListProps {
                                 <Link 
                                     to={`/journal/${entry.id}`}
                                     className={styles.entryTitle}
-                                    onClick={() => onEntryClick(entry)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        onEntryClick(entry)
+                                    }}
                                     style={{ cursor: 'pointer' }}
                                 >
                                     <h2>{entry.title}</h2>

@@ -11,8 +11,8 @@ import AddTaskPage from './pages/add-task';
 import ProjectForm from './components/ToDoList/Project-Form';
 import ProjectDetailsPage from './pages/ProjectDetails';
 import CalendarPage from './pages/CalenderPage';
-import JournalPage from './pages/JournalPage';
 import EntryDetails from './components/Journal/EntryDetails';
+import JournalPage from './pages/JournalPage';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
           <Route path="/project/:id" element={<ProjectDetailsPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/journal" element={<JournalPage />} />
-          <Route path="/journal/:id" element={<EntryDetails />} />
+          <Route path="/journal/entry/:id" element={<EntryDetails entryId={null} />} />
         </Routes>
       </Router> 
     </AuthProvider>
