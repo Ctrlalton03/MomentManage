@@ -111,6 +111,10 @@ const EntryDetails: React.FC<EntryDetailsProps> = ({entryId}) => {
                     <h2 className={styles.entryDetailsHeader}>Entry Header</h2>
                     <h1 className={styles.entryDetailsTitle}>{entry.title || 'Untitled Entry'}</h1>
                 </div>
+                <div className={styles.entryDetailsMoodContainer}>
+                    <h2 className={styles.entryDetailsHeader}>Mood</h2>
+                    <p className={styles.entryDetailsMood}>{entry.mood}</p>
+                </div>
                 <div className={styles.entryDetailsContentContainer}>
                     <h2 className={styles.entryDetailsHeader}>Entry Content</h2>
                     <p className={styles.entryDetailsContent}>{entry.content}</p>

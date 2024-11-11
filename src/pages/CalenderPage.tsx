@@ -88,19 +88,23 @@ const CalendarPage: React.FC = () => {
           </svg>
           Back to Dashboard
         </button>
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <main className={styles.main}>
+        <div className={styles.grid}>
+         <div className={styles.calendarGrid}>
           <CalendarGrid
             date={date}
             setDate={setDate}
             events={events}
             eventTypes={eventTypes}
           />
+         </div>
+          <div className={styles.eventsList}>
           <EventsList 
             events={events}
             onEventCreate={handleEventCreate}
             onEventDelete={handleEventDelete}
           />
+          </div>
         </div>
       </main>
     </div>
